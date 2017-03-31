@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.brh.dao.UserDao">
+	<!--设置domain类和数据库中表的字段一一对应，注意数据库字段和domain类中的字段名称不致，此处一定要！-->
+    <resultMap id="BaseResultMap" type="com.brh.domain.User">
+        <id column="USER_ID" property="userId" jdbcType="INTEGER" />
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+        <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR" />
+    </resultMap>
+    <!-- 查询单条记录 -->
+    <select id="getUserById" resultMap="BaseResultMap">
+        SELECT user_id,user_name,user_password 
+        FROM t_user 
+        WHERE USER_ID = #{userId}
+    </select>
+    
+    <!--保存信息  -->
+    <insert id="saveUser">
+	  insert into t_user (user_name,user_password)
+	  values (#{userName},#{userPassword})
+	</insert>
+    
+</mapper>
